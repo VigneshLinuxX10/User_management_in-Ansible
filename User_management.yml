@@ -1,0 +1,30 @@
+---
+- name: Add a new user
+  hosts: web_server
+  become: yes
+  tasks:
+    - name: Add user 'Vignesh'
+      user:
+        name: Vignesh
+        state: present
+
+  
+ - name: Create a group named "Linuxworld"
+   hosts: web_server
+   become: yes
+   tasks:
+    - name: Ensure group 'Linuxworld' exists
+      group:
+        name: Linuxworld
+        state: present
+
+
+- name: Add user 'Vignesh' to the group 'Linuxworld' 
+  hosts: web_server
+  become: yes
+  tasks:
+    - name: Add user to group
+      user:
+        name: Vignesh
+        groups: Linuxworld
+        append: yes
